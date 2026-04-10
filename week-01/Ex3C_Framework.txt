@@ -1,0 +1,129 @@
+Customers who have a favorite food 
+Framework:
+when do you usually come in to eat/order?
+	time
+	day
+
+dine-in, takeout, delivery
+
+Favorite menu item
+
+How much do you spend each visit on average?
+
+What makes you come to our restaurant?
+
+What makes you not come to our restaurant?
+
+What would make you come back more often?
+
+Reward preferences
+	Discounts
+	Free items
+	Point system to redeem offers
+	Exclusive perks
+	Others
+
+Location (Zip Code)
+
+Phone Number
+Email
+
+Limit to three sections: customer feedback, loyalty incentives, and end off with a section to grab contact information for a sweepstake giveaway. Keep it at most 12 questions per section. Also, label which question is open-ended (text based) or multiple choice.
+
+Section 1: Customer Feedback
+	When do you usually visit or order from us? (Select all that apply)
+		Weekday mornings
+		Weekday lunch
+		Weekday dinner
+		Weekend mornings
+		Weekend lunch
+		Weekday dinner
+	What time of day do you typically order or dine with us? (Multiple choice)
+		Morning
+		Afternoon
+		Evening
+		Late night
+	How do you usually order from us? (Multiple choice)
+		Dine-in
+		Takeout
+		Delivery
+	How often do you visit or order from us? (Multiple choice)
+		Multiple times per week
+		Once a week
+		A few times per month
+		Rarely
+	What is your average spend per visit?
+		Under $10
+		$10-$20
+		$21-$35
+		$36-$50
+		$50+
+	What is your favorite menu item? (Open-ended)
+	What are the main reason you choose our restaurant? (Select up to 3) (Multiple Choice)
+		Food quality
+		Price/value
+		Convenience/location
+		Speed of service
+		Atmosphere
+		Variety of menu options
+		Customer service
+	What, if anything, prevents you from visiting more often? (Select all that apply) (Multiple choice)
+		Price
+		Location/Convenience
+		Wait times
+		Limited menu options
+		Inconsistent quality
+		Lack of promotions/deals
+		Prefer other restaurants
+	What would make you visit us more often? (Open-ended)
+Section 2: Loyalty Program & Incentives
+	How interested are you in joining a customer rewards/loyalty program? (Multiple Choice)
+		Very interested
+		Somewhat interested
+		Neutral
+		Not interested
+	What type of rewards would you value most? (Select up to 2) (Multiple Choice)
+		Discounts (e.g., % off)
+		Free items (e.g., appetizer, drink, dessert)
+		Points-based system (earn & redeem)
+		Exclusive perks (VIP offers, early access)
+		Birthday rewards
+		Other
+	Which reward would most motivate you to return within the next 2 weeks? (Multiple Choice)
+		$5 off next visit
+		Free item with purchase
+		Double points/bonus rewards
+		BOGO (Buy-one-get-one) offer
+	How would you prefer to earn rewards? (Multiple choice)
+		Points per dollar spent
+		Points per visit
+		Visit-based rewards (e.g., 5 visits = reward)
+		Tiered system (more visits = better perks)
+	How easy should it be to earn rewards? (Multiple choice)
+		Very easy (frequent small rewards)
+		Moderate balance
+		Harder to earn but bigger rewards
+	Would personalized rewards based on your favorite items interest you? (Multiple Choice)
+		Yes
+		No
+		Maybe
+	What type of exclusive perks would interest you most? (Multiple Choice)
+		Members-only discounts
+		Early access to new menu items
+		Special events/invitations
+		Priority service
+		None
+	How would you prefer to receive rewards and promotions? (Select all that apply) (Multiple Choice)
+		Email
+		Text message (SMS)
+		Mobile app
+		In-store notifications
+	Is there anything else you'd like to see in a loyalty or rewards program? (Open-ended)
+Section 3: Contact Information (Swwepstakes Entry)
+	Enter your ZIP code:
+	Enter your email address (for rewards & sweepstakes entry):
+	Enter your phone number (optional, for text rewards):
+
+Section 1 - Segmentation + behavioral insights
+Section 2 - Program design decisions
+Section 3 - Retention + marketing activation
