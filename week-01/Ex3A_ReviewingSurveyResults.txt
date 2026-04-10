@@ -1,0 +1,35 @@
+1. What conclusion can you reach about the responses to this question?
+
+	The responses are all over the place except for some generalized information like location (for our cohort), and there is lots of "dirty" data.
+
+2. Is the default summary or visualization helpful? How could it be improved?
+
+	The default summary is good to summarize and visualize the data as a whole. It could be improved by trimming down the amount of summary displayed because for some of the sections, the summary is not necessary or applicable.
+
+3. For questions with an “Other” option, where can you find the actual text of those responses? Do you notice anything that might be tricky about analyzing these?
+
+	With the "Other" option, you can find the actual text of these responses by looking at the summary on the dashboard or going into detailed view and finding that specific question.
+
+4. For questions calling for a written response, what challenges do you notice about finding trends or patterns in the answers provided?
+
+	You must clean the data because written responses are prone to whitespace, punctuation, and grammatical errors.
+
+5. Now that you can see the responses, how might you recommend rephrasing this or question or the response options in a future survey?
+
+	Provide checkboxes or multiple choice responses for categorical data that can be generalized within a few statements, make numerical values only numeric and specify a format or value to type in, and iteratively apply feedback to word the questions better.
+
+6. Is there anything that surprised you about the survey responses?
+
+	If there was not a format specified, like when dealing with height (cm, m, in, ft), the numbers could be all over the place. Specification allows for numbers to be grouped and analyzed properly, requiring less conversion and changes to raw data.
+
+7. Looking at the responses to questions 1 and 5, are there any ideas you might try to include in your morning routine, or any questions that you are also curious about?
+
+	I will apply what I learned in CDIR and Applied Learning to my morning routine to ensure that I am prepared for the day, workday or not.
+	
+8. Pretend you are the instructor. Is there anything you can learn from this survey to help in how you approach teaching this class?
+	
+	I would gather weekly, if not bi-weekly, feedback to ensure that instruction is properly applied and not just listened to.
+	
+9. Again, pretend you are the instructor. Do you think it was helpful or not helpful to make this survey anonymous? Why or why not? (If you can see both pros and cons, you may include both.)
+
+	It was helpful to make this survey anonymous to avoid bias or being judgemental of each other. We all have different ways to analyze things and making this a safe space, just like how surveys should be even outside of Year Up, should retain the user's privacy since we are collecting personal data, no matter how confidential. One drawback, however, to making surveys anonymous is not being able to identify target audiences and adjusting curriculum to. Since it could be anyone's response, it has equal weight to other responses. For example, if there is a student or guest struggling in a topic, it has equal weight to someone frustrated that the concepts are too easy to understand and that it should be more challenging and engaging.
