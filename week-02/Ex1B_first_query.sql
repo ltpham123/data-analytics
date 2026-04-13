@@ -1,0 +1,3 @@
+/*
+Sakila is a database used to collect information about rentals and customers for use by a media rental company.
+*/
