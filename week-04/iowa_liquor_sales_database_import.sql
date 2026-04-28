@@ -4,6 +4,7 @@ USE iowa_liquor_sales_database;
 -- With the help of AI, generated and imported the
 -- liquor database from pgadmin to a schema in MySQL
 -- Learned to import from PostgreSQL to MySQL
+-- Please give credit if you're using this!
 
 -- Generate sales table
 DROP TABLE IF EXISTS sales;
