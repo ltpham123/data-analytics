@@ -1,3 +1,9 @@
+/*
+SMILE	FOR		WHAT	GIVES		HAPPINESS	OR			LAUGHTER
+SELECT	FROM	WHERE	GROUP BY	HAVING		ORDER BY	LIMIT
+*/
+
+USE iowa_liquor_sales_database;
 /* Name: Longley Pham
 Category/Vendor of Choice: Constellation
 Instructions: Copy and paste the below questions into your script.
@@ -10,10 +16,27 @@ Make sure the questions and plain-language answers are commented out!
 -- 1. Create a list of all transactions for your chosen [Category/Vendor] that took place in
 -- the last quarter of 2014, sorted by the total sale amount from highest to lowest.
 -- (Strength: Identifying high-volume peak periods).
+/*
+SELECT DISTINCT vendor
+FROM sales;
+
+SELECT *
+FROM sales
+WHERE vendor ILIKE '%conste%'
+	AND "date" >= '2014-10-01'
+	AND "date" < '2015-01-01'
+ORDER BY total DESC;
+*/
 
 -- 2. Which transactions for your [Category/Vendor] had a bottle quantity greater than 12?
 -- Display the date, store number, item description, and total amount.
 -- (Strength: Identifying bulk buyers or wholesale-style transactions).
+/*
+SELECT date, store, description, total
+FROM sales
+WHERE vendor ILIKE '%conste%'
+	AND bottle_qty > 12;
+*/
 
 -- 3. Find all products in the products_table whose item_description contains a specific
 -- keyword (e.g., 'Limited', 'Spiced'). What categories do they belong to?
@@ -26,6 +49,27 @@ Make sure the questions and plain-language answers are commented out!
 -- 4. What is the total sales revenue and the average bottle price (btl_price) for
 -- your chosen [Category/Vendor]?
 -- (Strength/Baseline: Establishing the financial footprint).
+/*
+SELECT
+CASE
+	WHEN vendor ILIKE '%conste%' THEN 'Constellation Wine Company Inc'
+		ELSE vendor
+		END AS new_vendor,
+SUM(total) :: money AS "Total Sales Revenue",
+AVG(btl_price::numeric) :: money AS "Average Bottle Price"
+FROM sales
+WHERE vendor ILIKE '%conste%'
+GROUP BY new_vendor;
+*/
+
+/* -- AI reviewed
+SELECT
+    'Constellation Wine Company Inc' AS vendor,
+    SUM(total)::money AS "Total Sales Revenue",
+    AVG(btl_price)::money AS "Average Bottle Price"
+FROM sales
+WHERE vendor ILIKE '%conste%';
+*/
 
 -- 5. How many transactions were recorded for each specific item description within your
 -- chosen [Category]? Which specific product is the most frequently purchased?
@@ -66,6 +110,29 @@ Make sure the questions and plain-language answers are commented out!
 -- 13. Write a query that shows total sales for your [Category/Vendor] by county.
 -- Which county generates the most revenue for you?
 -- (Strength: Identifying your geographic stronghold).
+/* SELECT county, SUM(total)
+FROM sales JOIN counties
+	USING(county)
+WHERE category_name ILIKE '%lique%'
+GROUP BY county;
+*/
+/*
+SELECT county, SUM(total)
+FROM sales JOIN counties
+	USING(county)
+WHERE vendor ILIKE '%conste%'
+GROUP BY county
+*/
+/*
+SELECT county, SUM(total)
+FROM sales JOIN counties
+	USING(county)
+WHERE vendor ILIKE '%conste%'
+GROUP BY county
+ORDER BY 2 DESC
+-- Polk generates the most revenue for our products.
+-- Look into events or bars, congregation, population, to see why they generate a lot of revenue
+*/
 
 -- 14. Join the sales_table and products_table to show total revenue for your [Vendor]
 -- alongside the proof and pack size of the items.
