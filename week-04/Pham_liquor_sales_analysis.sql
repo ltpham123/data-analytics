@@ -1,82 +1,10 @@
-USE iowa_liquor_sales_database;
-
-LOAD DATA LOCAL INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/sales.csv'
-INTO TABLE sales_raw
-FIELDS TERMINATED BY ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(sale_date, convenience_store, store, county_number, county, category, category_name,
- vendor_no, vendor, item, description, pack, liter_size,
- @state_btl_cost, @btl_price, bottle_qty, @total)
-SET
-state_btl_cost = NULLIF(REPLACE(REPLACE(@state_btl_cost, '$', ''), ',', ''), '\N'),
-btl_price = NULLIF(REPLACE(REPLACE(@btl_price, '$', ''), ',', ''), '\N'),
-total = NULLIF(REPLACE(REPLACE(@total, '$', ''), ',', ''), '\N');
-
-CREATE TABLE sales_raw (
-  sale_date TEXT,
-  convenience_store TEXT,
-  store TEXT,
-  county_number TEXT,
-  county TEXT,
-  category TEXT,
-  category_name TEXT,
-  vendor_no TEXT,
-  vendor TEXT,
-  item TEXT,
-  description TEXT,
-  pack TEXT,
-  liter_size TEXT,
-  state_btl_cost TEXT,
-  btl_price TEXT,
-  bottle_qty TEXT,
-  total TEXT
-);
-
-CREATE TABLE sales_clean (
-  sale_date DATETIME,
-  convenience_store VARCHAR(50),
-  store INT,
-  county_number INT,
-  county VARCHAR(100),
-  category INT,
-  category_name VARCHAR(255),
-  vendor_no INT,
-  vendor VARCHAR(255),
-  item INT,
-  description VARCHAR(255),
-  pack INT,
-  liter_size INT,
-  state_btl_cost DECIMAL(10,2),
-  btl_price DECIMAL(10,2),
-  bottle_qty INT,
-  total DECIMAL(10,2)
-);
-
-SELECT *
-FROM sales_raw;
-
-SHOW COLUMNS FROM sales_raw LIKE 'description';
-
-ALTER TABLE sales_raw
-MODIFY description TEXT;
-
-SELECT *
-FROM sales_raw
-WHERE store IS NULL
-   OR item IS NULL
-   OR total IS NULL;
-   
-/* Name: [Your Name]
-Category/Vendor of Choice: [e.g., CANADIAN WHISKIES / Jim Beam Brands]
+/* Name: Longley Pham
+Category/Vendor of Choice: Constellation
 Instructions: Copy and paste the below questions into your script.
 Below each question, write your response, including relevant SQL queries.
 Make sure the questions and plain-language answers are commented out!
 */
 
-SELECT *
-FROM sales;
 -- SELECT, Filtering & Sorting
 
 -- 1. Create a list of all transactions for your chosen [Category/Vendor] that took place in
