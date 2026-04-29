@@ -41,7 +41,37 @@ WHERE vendor ILIKE '%conste%'
 -- 3. Find all products in the products_table whose item_description contains a specific
 -- keyword (e.g., 'Limited', 'Spiced'). What categories do they belong to?
 -- (Opportunity: Identifying niche product variants).
+SELECT DISTINCT item_description
+FROM products
+WHERE -- vendor_name ILIKE '%conste%'
+--	NOT
+		(
+		item_description ILIKE '%limited%' AS Limited
+		OR item_description ILIKE '%spiced%' AS Spiced
+	);
+-- WHERE category_name ILIKE '%limited%'
 
+SELECT
+	CASE
+		WHEN item_description ILIKE '%limited%' THEN 'Limited'
+		WHEN item_description ILIKE '%spiced%' THEN 'Spiced'
+		WHEN item_description ILIKE '%chocolate%' THEN 'Chocolate'
+		WHEN (item_description ILIKE '%peach%'
+			OR item_description ILIKE '%berry%'
+			OR item_description ILIKE '%lemon%'
+			OR item_description ILIKE '%limon%'
+			OR item_description ILIKE '%cherry%'
+			OR item_description ILIKE '%citrus%'
+			OR item_description ILIKE '%citron%'
+			OR item_description ILIKE '%grape%')
+		THEN 'Fruit'
+		WHEN item_description ILIKE '%peppermint%' THEN 'Peppermint'
+		ELSE item_description
+	END AS group_name,
+	COUNT(*) AS total
+FROM products
+GROUP BY 1
+ORDER BY total DESC;
 
 
 -- Aggregation
@@ -102,7 +132,63 @@ ORDER BY 2 ASC;
 -- 7. What is the total revenue for every vendor within your chosen [Category],
 -- sorted from highest to lowest?
 -- (Threat: Identifying your top competitors in that space).
+-- Look for Beer, Wine, Spirits competitors:
+-- Beer:	Constellation Brands, Diageo
+-- Wine: 	Constellation Brands, Pernod Ricard, Moet Hennessy
+-- Spirits:	Constellation Brands, Diageo, Pernod Ricard, Moet Hennessy, Jim Beam,
+-- 			Bacardi, Sazerac Company, Sidney Frank Importing Co
 
+SELECT DISTINCT category_name
+FROM sales
+-- WHERE vendor ILIKE '%conste%'
+
+SELECT DISTINCT vendor_no, vendor, SUM(total)
+FROM sales
+WHERE (category_name ILIKE '%vodka%'
+	OR category_name ILIKE '%brand%'
+	OR category_name ILIKE '%tequila%'
+	OR category_name ILIKE '%whisk%')
+GROUP BY vendor_no, vendor
+ORDER BY vendor_no;
+
+SELECT
+	CASE
+		WHEN category_name ILIKE '%vodka%' THEN 'Vodka'
+		WHEN category_name ILIKE '%brand%' THEN 'Brandy'
+		WHEN category_name ILIKE '%tequila%' THEN 'Tequila'
+		WHEN category_name ILIKE '%whisk%' THEN 'Whiskey'
+		ELSE 'Other'
+	END AS category,
+
+	COUNT(DISTINCT vendor) AS "Vendor Name"
+FROM sales
+GROUP BY 1
+ORDER BY 1;
+	
+
+SELECT DISTINCT vendor AS "Vodka Vendors", SUM(total)
+FROM sales
+WHERE category_name ILIKE '%vodka%'
+GROUP BY 1
+ORDER BY 2 DESC
+
+SELECT DISTINCT vendor AS "Brandy Vendors", SUM(total)
+FROM sales
+WHERE category_name ILIKE '%brand%'
+GROUP BY 1
+ORDER BY 2 DESC
+
+SELECT DISTINCT vendor AS "Tequila Vendors", SUM(total)
+FROM sales
+WHERE category_name ILIKE '%tequila%'
+GROUP BY 1
+ORDER BY 2 DESC
+
+SELECT DISTINCT vendor AS "Whiskey Vendors", SUM(total)
+FROM sales
+WHERE category_name ILIKE '%whisk%'
+GROUP BY 1
+ORDER BY 2 DESC
 -- 8. Which stores had total sales revenue for your [Category/Vendor] exceeding $2,000?
 -- (Hint: Use HAVING to filter aggregated store totals).
 -- (Strength: Pinpointing high-performing retail locations).
