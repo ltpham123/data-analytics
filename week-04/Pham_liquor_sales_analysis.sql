@@ -74,10 +74,30 @@ WHERE vendor ILIKE '%conste%';
 -- 5. How many transactions were recorded for each specific item description within your
 -- chosen [Category]? Which specific product is the most frequently purchased?
 -- (Strength: Identifying your "hero" product).
+/*
+SELECT description, COUNT(*) AS orders
+FROM sales
+WHERE vendor ILIKE '%Constellation Wine Company%'
+GROUP BY description
+ORDER BY 2 DESC;
+-- In 2014, Black Velvet Canadian Whiskey was the most ordered Constellation Wine Company product.
+*/
 
 -- 6. Which store generated the highest total revenue for your [Category/Vendor]?
 -- Which generated the lowest (but still greater than zero)?
 -- (Strength vs. Weakness: Identifying your best and worst retail partners).
+/*
+SELECT stores.name, SUM(total)
+FROM sales
+JOIN stores
+	ON sales.store = stores.store
+WHERE sales.vendor ILIKE '%conste%'
+GROUP BY stores.name
+ORDER BY 2 ASC;
+-- In 2014, Costco Wholesale #788 generated the highest revenue for Constellation Wine Company.
+-- In 2014, Cubby's Sioux City generated the lowest revenue for Constellation Wine Company.
+-- Explore why they are the highest/lowest revenue generator for Constellation Wine Company.
+*/
 
 -- 7. What is the total revenue for every vendor within your chosen [Category],
 -- sorted from highest to lowest?
