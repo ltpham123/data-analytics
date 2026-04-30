@@ -24,6 +24,11 @@ WHERE vendor ILIKE '%conste%'
 	AND "date" >= '2014-01-01'
 	AND "date" < '2015-01-01'
 
+-- Spirits market
+SELECT DISTINCT category_name
+FROM products
+WHERE vendor_name ILIKE '%conste%'
+
 -- General Summary
 /*
 	-- Total Revenue : $23.49M
@@ -77,6 +82,12 @@ WHERE vendor ILIKE '%conste%'
 	-- 	Polk, Linn, Black Hawk dropped down to 26, 23, 9 respectively
 */
 
+-- Consumer Spending
+
+-- Product Analysis
 
 
---
+-- Analysis VS Competitors
+
+-- Geographical Analysis
+
