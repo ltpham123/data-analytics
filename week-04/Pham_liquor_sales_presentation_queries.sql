@@ -5,11 +5,6 @@
 USE iowa_liquor_sales_database;
 -- Graphs
 
--- //////////////////////////////
--- ///// Revenue per Capita /////
--- //////////////////////////////
-
-
 -- ///////////////////////////////
 -- //////////// Sales ////////////
 -- ///////////////////////////////
@@ -32,10 +27,31 @@ GROUP BY category_group
 ORDER BY revenue DESC;
 
 -- By product
+SELECT 
+    description,
+    SUM(total) AS revenue
+FROM sales
+WHERE vendor ILIKE '%conste%'
+  AND date >= '2014-01-01'
+  AND date < '2015-01-01'
+GROUP BY description
+ORDER BY revenue DESC
+LIMIT 10;
 
 -- By revenue
+SELECT 
+    county,
+    SUM(total) AS revenue
+FROM sales
+JOIN counties USING(county)
+WHERE vendor ILIKE '%conste%'
+  AND sales.date >= '2014-01-01'
+  AND sales.date < '2015-01-01'
+  AND population > 10000
+GROUP BY county
+ORDER BY revenue DESC;
 
--- By capita
+-- Revenue by capita
 SELECT 
     county,
     SUM(total) AS revenue,
