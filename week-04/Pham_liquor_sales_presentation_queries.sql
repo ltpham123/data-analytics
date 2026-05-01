@@ -3,6 +3,55 @@
 -- Presentation Queries
 
 USE iowa_liquor_sales_database;
+-- Graphs
+
+-- //////////////////////////////
+-- ///// Revenue per Capita /////
+-- //////////////////////////////
+
+
+-- ///////////////////////////////
+-- //////////// Sales ////////////
+-- ///////////////////////////////
+
+-- By category
+SELECT 
+    CASE
+        WHEN category_name ILIKE '%whisk%' THEN 'Whiskies'
+        WHEN category_name ILIKE '%vodka%' THEN 'Vodka'
+        WHEN category_name ILIKE '%brand%' THEN 'Brandies'
+        WHEN category_name ILIKE '%tequila%' THEN 'Tequila'
+        ELSE 'Other'
+    END AS category_group,
+    SUM(total) AS revenue
+FROM sales
+WHERE vendor ILIKE '%conste%'
+  AND date >= '2014-01-01'
+  AND date < '2015-01-01'
+GROUP BY category_group
+ORDER BY revenue DESC;
+
+-- By product
+
+-- By revenue
+
+-- By capita
+SELECT 
+    county,
+    SUM(total) AS revenue,
+    MAX(population) AS population,
+    SUM(total) / MAX(population) AS revenue_per_capita
+FROM sales
+JOIN counties USING(county)
+WHERE vendor ILIKE '%conste%'
+  AND sales.date >= '2014-01-01'
+  AND sales.date < '2015-01-01'
+  AND population > 10000
+GROUP BY county
+ORDER BY revenue_per_capita DESC;
+
+
+
 -- Context
 /*
 	-- Time Period (14 months, 2014-01-01 to 2015-02-01)
@@ -180,9 +229,9 @@ USE iowa_liquor_sales_database;
 
 
 
-
 -- Analysis VS Competitors
-    -- Total Market Analysis
+/*
+	-- Total Market Analysis
 	SELECT SUM(total) as market_total
 	FROM sales
 	-- WHERE category_name ILIKE '%brandi%' -- $13.51M;
@@ -204,9 +253,9 @@ USE iowa_liquor_sales_database;
 	FROM sales
 	JOIN counties USING(county)
 	WHERE vendor ILIKE '%conste%'
-	  AND "date" >= '2014-01-01'
-	  AND "date" < '2015-01-01'
-	  AND population > 10000
+		AND "date" >= '2014-01-01'
+		AND "date" < '2015-01-01'
+		AND population > 10000
 	GROUP BY category_group
 	ORDER BY total_sales DESC;
 
@@ -262,5 +311,61 @@ USE iowa_liquor_sales_database;
 	GROUP BY category_group, vendor_group
 	ORDER BY category_group DESC, revenue DESC
 
--- Geographical Analysis
+	-- Competitors for all competing brands
+	SELECT
+		CASE
+			WHEN category_name ILIKE '%whisk%' THEN 'Whiskies'
+			WHEN category_name ILIKE '%vodka%' THEN 'Vodka'
+			WHEN category_name ILIKE '%brand%' THEN 'Brandies'
+			WHEN category_name ILIKE '%tequila%' THEN 'Tequila'
+		END AS category_group,
+		CASE -- AI assisted for mass vendors
+			WHEN vendor ILIKE '%diageo%' THEN 'Diageo'
+			WHEN vendor ILIKE '%brown-forman%' THEN 'Brown-Forman Corporation'
+			WHEN vendor ILIKE '%constellation%' THEN 'Constellation Brands'
+			WHEN vendor ILIKE '%sazerac%' THEN 'Sazerac'
+			WHEN vendor ILIKE '%jim beam%' THEN 'Jim Beam Brands'
+			WHEN vendor ILIKE '%pernod ricard%' THEN 'Pernod Ricard'
+			
+			WHEN vendor ILIKE '%bacardi%' THEN 'Bacardi'
+			WHEN vendor ILIKE '%heaven%' THEN 'Heaven Hill'
+			WHEN vendor ILIKE '%luxco%' THEN 'Luxco'
+			WHEN vendor ILIKE '%william grant%' THEN 'William Grant and Sons'
+			
+			WHEN vendor ILIKE '%m.s. walker%' OR vendor ILIKE '%ms walker%' THEN 'M.S. Walker'
+			WHEN vendor ILIKE '%shaw ross%' THEN 'Shaw Ross International Importers'
+			WHEN vendor ILIKE '%park street%' THEN 'Park Street Imports'
+			WHEN vendor ILIKE '%palm bay%' THEN 'Palm Bay Imports'
+			
+			WHEN vendor ILIKE '%hood river%' THEN 'Hood River Distillers'
+			WHEN vendor ILIKE '%cedar ridge%' THEN 'Cedar Ridge Vineyards'
+			WHEN vendor ILIKE '%mccormick%' THEN 'McCormick Distilling Company'
+			
+			WHEN vendor ILIKE '%remy%' THEN 'Remy Cointreau'
+			WHEN vendor ILIKE '%moet%' OR vendor ILIKE '%hennessy%' THEN 'Moet Hennessy'
 
+			-- manually adding since AI didn't catch it
+			WHEN vendor ILIKE '%wildman and sons%' THEN 'Wildman and Sons'
+			WHEN vendor ILIKE '%klin spirits%' THEN 'Klin Spirits'
+			WHEN vendor ILIKE '%levecke%' THEN 'Levecke Corp'
+			WHEN vendor ILIKE '%imperial brands%' THEN 'Imperial Brands'
+			WHEN vendor ILIKE '%russian standard vodka%' THEN 'Russian Standard Vodka'
+			
+			ELSE vendor
+		END AS vendor_group,
+		SUM(total) AS revenue
+	FROM sales
+	WHERE sales.date >= '2014-01-01'
+		AND sales.date < '2015-01-01'
+		AND (
+			category_name ILIKE '%whisk%'
+	--		OR category_name ILIKE '%vodka%'
+	--		OR category_name ILIKE '%brand%'
+	--		OR category_name ILIKE '%tequila%'
+		)
+	GROUP BY category_group, vendor_group
+	ORDER BY category_group DESC, revenue DESC --, vendor_group
+*/
+
+-- Embellishments
+-- Consider geographical analysis; location of convenience stores, college towns, and/or events
