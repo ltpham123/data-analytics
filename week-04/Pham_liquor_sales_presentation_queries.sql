@@ -5,54 +5,36 @@
 USE iowa_liquor_sales_database;
 -- Graphs
 
--- ///////////////////////////////
--- //////////// Sales ////////////
--- ///////////////////////////////
-
--- By category
-SELECT 
-    CASE
-        WHEN category_name ILIKE '%whisk%' THEN 'Whiskies'
-        WHEN category_name ILIKE '%vodka%' THEN 'Vodka'
-        WHEN category_name ILIKE '%brand%' THEN 'Brandies'
-        WHEN category_name ILIKE '%tequila%' THEN 'Tequila'
-        ELSE 'Other'
-    END AS category_group,
-    SUM(total) AS revenue
+-- By category #1, by product #2
+/*SELECT
+	CASE
+		WHEN products.category_name ILIKE '%whisk%' THEN 'Whiskies'
+		WHEN products.category_name ILIKE '%vodka%' THEN 'Vodka'
+		WHEN products.category_name ILIKE '%brand%' THEN 'Brandies'
+		WHEN products.category_name ILIKE '%tequila%' THEN 'Tequila'
+		ELSE products.category_name
+	END AS category_group,
+	CASE 
+		WHEN products.item_description ILIKE '%paul masson%' THEN 'Paul Masson'
+		WHEN products.item_description ILIKE '%black velvet%' THEN 'Black Velvet'
+		WHEN products.item_description ILIKE '%master%' 
+		  OR products.item_description ILIKE '%mc master%' THEN 'McMasters'
+		WHEN products.item_description ILIKE '%svedka%' 
+		  OR products.item_description ILIKE '%svekda%' THEN 'Svedka'
+		WHEN products.item_description ILIKE '%casa noble%' THEN 'Casa Noble'
+		ELSE products.item_description
+	END AS brand_series,
+	SUM(total) as revenue
 FROM sales
-WHERE vendor ILIKE '%conste%'
-  AND date >= '2014-01-01'
-  AND date < '2015-01-01'
-GROUP BY category_group
-ORDER BY revenue DESC;
+JOIN products ON sales.item = products.item_no
+WHERE sales.vendor ILIKE '%conste%'
+	AND sales.date >= '2014-01-01'
+	AND sales.date < '2015-01-01'
+GROUP BY category_group, brand_series
+ORDER BY 3 DESC*/
 
--- By product
-SELECT 
-    description,
-    SUM(total) AS revenue
-FROM sales
-WHERE vendor ILIKE '%conste%'
-  AND date >= '2014-01-01'
-  AND date < '2015-01-01'
-GROUP BY description
-ORDER BY revenue DESC
-LIMIT 10;
-
--- By revenue
-SELECT 
-    county,
-    SUM(total) AS revenue
-FROM sales
-JOIN counties USING(county)
-WHERE vendor ILIKE '%conste%'
-  AND sales.date >= '2014-01-01'
-  AND sales.date < '2015-01-01'
-  AND population > 10000
-GROUP BY county
-ORDER BY revenue DESC;
-
--- Revenue by capita
-SELECT 
+-- By revenue #3; by capita #4, revenue vs revenue per capita #5
+/*SELECT 
     county,
     SUM(total) AS revenue,
     MAX(population) AS population,
@@ -64,9 +46,216 @@ WHERE vendor ILIKE '%conste%'
   AND sales.date < '2015-01-01'
   AND population > 10000
 GROUP BY county
-ORDER BY revenue_per_capita DESC;
+ORDER BY revenue_per_capita DESC;*/
 
+-- Vendor revenue #6, vendor market share #7
+/*-- AI Assisted; categorize by category_group, ordered by revenue, and display market share in each category
+WITH base AS (
+    SELECT
+        CASE
+            WHEN category_name ILIKE '%whisk%' THEN 'Whiskies'
+            WHEN category_name ILIKE '%vodka%' THEN 'Vodka'
+            WHEN category_name ILIKE '%brand%' THEN 'Brandies'
+            WHEN category_name ILIKE '%tequila%' THEN 'Tequila'
+            ELSE 'Others'
+        END AS category_group,
 
+        CASE
+            WHEN vendor ILIKE '%diageo%' THEN 'Diageo'
+            WHEN vendor ILIKE '%brown-forman%' THEN 'Brown-Forman Corporation'
+            WHEN vendor ILIKE '%constellation%' THEN 'Constellation Brands'
+            WHEN vendor ILIKE '%sazerac%' THEN 'Sazerac'
+            WHEN vendor ILIKE '%jim beam%' THEN 'Jim Beam Brands'
+            WHEN vendor ILIKE '%pernod ricard%' THEN 'Pernod Ricard'
+            WHEN vendor ILIKE '%bacardi%' THEN 'Bacardi'
+            WHEN vendor ILIKE '%heaven%' THEN 'Heaven Hill'
+            WHEN vendor ILIKE '%luxco%' THEN 'Luxco'
+            WHEN vendor ILIKE '%william grant%' THEN 'William Grant and Sons'
+            WHEN vendor ILIKE '%m.s. walker%' OR vendor ILIKE '%ms walker%' THEN 'M.S. Walker'
+            WHEN vendor ILIKE '%shaw ross%' THEN 'Shaw Ross International Importers'
+            WHEN vendor ILIKE '%park street%' THEN 'Park Street Imports'
+            WHEN vendor ILIKE '%palm bay%' THEN 'Palm Bay Imports'
+            WHEN vendor ILIKE '%hood river%' THEN 'Hood River Distillers'
+            WHEN vendor ILIKE '%cedar ridge%' THEN 'Cedar Ridge Vineyards'
+            WHEN vendor ILIKE '%mccormick%' THEN 'McCormick Distilling Company'
+            WHEN vendor ILIKE '%remy%' THEN 'Remy Cointreau'
+            WHEN vendor ILIKE '%moet%' OR vendor ILIKE '%hennessy%' THEN 'Moet Hennessy'
+            ELSE 'Other'
+        END AS vendor_group,
+
+        total
+    FROM sales
+    WHERE date >= '2014-01-01'
+      AND date < '2015-01-01'
+)
+SELECT
+    category_group,
+    vendor_group,
+    SUM(total) AS total_revenue,
+    SUM(total) * 1.0 
+        / SUM(SUM(total)) OVER (PARTITION BY category_group) AS market_share_in_category
+FROM base
+GROUP BY category_group, vendor_group
+ORDER BY category_group, total_revenue DESC;*/
+
+-- Black Velvet Dominant
+/*SELECT -- AI assisted
+    brand_group,
+    total_sales,
+    ROUND(100.0 * total_sales / SUM(total_sales) OVER (), 2) AS market_share_pct
+FROM (
+    SELECT
+        CASE
+            -- BLACK VELVET
+            WHEN item_description ILIKE '%black velvet%' THEN 'Black Velvet'
+
+            -- JACK DANIELS
+            WHEN item_description ILIKE '%jack daniel%' 
+              OR item_description ILIKE '%gentleman jack%' THEN 'Jack Daniel''s'
+
+            -- FIREBALL
+            WHEN item_description ILIKE '%fireball%' 
+              OR item_description ILIKE '%cinerator%' THEN 'Fireball / Cinnamon'
+
+            -- CROWN ROYAL
+            WHEN item_description ILIKE '%crown royal%' THEN 'Crown Royal'
+
+            -- JIM BEAM FAMILY
+            WHEN item_description ILIKE '%jim beam%' 
+              OR item_description ILIKE '%red stag%' 
+              OR item_description ILIKE '%devil''s cut%' 
+              OR item_description ILIKE '%jacob''s ghost%' THEN 'Jim Beam'
+
+            -- EVAN WILLIAMS
+            WHEN item_description ILIKE '%evan williams%' THEN 'Evan Williams'
+
+            -- WILD TURKEY
+            WHEN item_description ILIKE '%wild turkey%' 
+              OR item_description ILIKE '%russell''s reserve%' THEN 'Wild Turkey'
+
+            -- BULLEIT
+            WHEN item_description ILIKE '%bulleit%' THEN 'Bulleit'
+
+            -- MAKERS MARK
+            WHEN item_description ILIKE '%maker''s%' THEN 'Maker''s Mark'
+
+            -- KNOB CREEK / BEAM PREMIUM
+            WHEN item_description ILIKE '%knob creek%' 
+              OR item_description ILIKE '%basil hayden%' 
+              OR item_description ILIKE '%booker%' 
+              OR item_description ILIKE '%baker''s%' THEN 'Beam Premium'
+
+            -- WOODFORD RESERVE
+            WHEN item_description ILIKE '%woodford%' THEN 'Woodford Reserve'
+
+            -- BUFFALO TRACE FAMILY
+            WHEN item_description ILIKE '%buffalo trace%' 
+              OR item_description ILIKE '%blanton%' 
+              OR item_description ILIKE '%eagle rare%' 
+              OR item_description ILIKE '%weller%' 
+              OR item_description ILIKE '%stagg%' 
+              OR item_description ILIKE '%eh taylor%' THEN 'Buffalo Trace'
+
+            -- SEAGRAMS
+            WHEN item_description ILIKE '%seagram%' THEN 'Seagram''s'
+
+            -- CANADIAN CLUB
+            WHEN item_description ILIKE '%canadian club%' THEN 'Canadian Club'
+
+            -- CANADIAN MIST
+            WHEN item_description ILIKE '%canadian mist%' THEN 'Canadian Mist'
+
+            -- WINDSOR
+            WHEN item_description ILIKE '%windsor%' THEN 'Windsor'
+
+            -- RICH & RARE
+            WHEN item_description ILIKE '%rich & rare%' THEN 'Rich & Rare'
+
+            -- LORD CALVERT
+            WHEN item_description ILIKE '%calvert%' THEN 'Lord Calvert'
+
+            -- KESSLER
+            WHEN item_description ILIKE '%kessler%' THEN 'Kessler'
+
+            -- TEN HIGH
+            WHEN item_description ILIKE '%ten high%' THEN 'Ten High'
+
+            -- EARLY TIMES
+            WHEN item_description ILIKE '%early times%' THEN 'Early Times'
+
+            -- HEAVEN HILL ECONOMY
+            WHEN item_description ILIKE '%heaven hill%' 
+              OR item_description ILIKE '%jw dant%' 
+              OR item_description ILIKE '%fighting cock%' THEN 'Heaven Hill Economy'
+
+            -- SOUTHERN COMFORT
+            WHEN item_description ILIKE '%southern comfort%' THEN 'Southern Comfort'
+
+            -- YUKON JACK
+            WHEN item_description ILIKE '%yukon jack%' THEN 'Yukon Jack'
+
+            -- JAMESON / IRISH CORE
+            WHEN item_description ILIKE '%jameson%' THEN 'Jameson'
+            WHEN item_description ILIKE '%tullamore%' THEN 'Tullamore D.E.W.'
+            WHEN item_description ILIKE '%2 gingers%' THEN '2 Gingers'
+            WHEN item_description ILIKE '%powers%' THEN 'Powers'
+            WHEN item_description ILIKE '%paddy%' THEN 'Paddy'
+            WHEN item_description ILIKE '%redbreast%' THEN 'Redbreast'
+            WHEN item_description ILIKE '%green spot%' THEN 'Green Spot'
+            WHEN item_description ILIKE '%midleton%' THEN 'Midleton'
+
+            -- JOHNNIE WALKER
+            WHEN item_description ILIKE '%johnnie walker%' THEN 'Johnnie Walker'
+
+            -- DEWARS
+            WHEN item_description ILIKE '%dewar%' THEN 'Dewar''s'
+
+            -- CHIVAS
+            WHEN item_description ILIKE '%chivas%' THEN 'Chivas Regal'
+
+            -- BUCHANANS
+            WHEN item_description ILIKE '%buchanan%' THEN 'Buchanan''s'
+
+            -- J&B
+            WHEN item_description ILIKE '%j & b%' THEN 'J&B'
+
+            -- CUTTY SARK
+            WHEN item_description ILIKE '%cutty sark%' THEN 'Cutty Sark'
+
+            -- LAUDERS
+            WHEN item_description ILIKE '%lauder%' THEN 'Lauder''s'
+
+            -- VALUE SCOTCH
+            WHEN item_description ILIKE '%scoresby%' 
+              OR item_description ILIKE '%passport%' 
+              OR item_description ILIKE '%clan macgregor%' THEN 'Value Scotch'
+
+            -- CEDAR RIDGE
+            WHEN item_description ILIKE '%cedar ridge%' THEN 'Cedar Ridge'
+
+            -- BIRD DOG
+            WHEN item_description ILIKE '%bird dog%' THEN 'Bird Dog'
+
+            -- REVEL STOKE
+            WHEN item_description ILIKE '%revel stoke%' THEN 'Revel Stoke'
+
+            -- OLD CROW
+            WHEN item_description ILIKE '%old crow%' THEN 'Old Crow'
+
+            -- BENCHMARK
+            WHEN item_description ILIKE '%benchmark%' THEN 'Benchmark'
+
+            ELSE 'Other / Small Brands'
+        END AS brand_group,
+        SUM(sales.total) AS total_sales
+    FROM sales
+    JOIN products ON sales.item = products.item_no
+    WHERE products.category_name ILIKE '%whisk%'
+      AND sales.date >= '2014-01-01'
+      AND sales.date < '2015-01-01'
+    GROUP BY brand_group
+) t
+ORDER BY total_sales DESC;*/
 
 -- Context
 /*
@@ -160,7 +349,8 @@ ORDER BY revenue_per_capita DESC;
 		ORDER BY 2 DESC
 		LIMIT 3
 	-- 	Dickinson, O'Brien, and Carroll were highest performers, at the highest of $19.78 per capita.
-	-- 	Polk, Linn, Black Hawk dropped down to 26, 23, 9 respectively
+	--  	Meaning every adult, including their children, spent an average of $20 at your local liquor store.
+	-- 	Polk, Linn, Black Hawk dropped down to 26th, 23th, 9th respectively
     
     -- Find out how to replicate Dickinson, O'Brien, and Carroll's profit margin and scale it
     -- into larger counties, like Polk, Linn, and Black Hawk. Theoretically, generate over
