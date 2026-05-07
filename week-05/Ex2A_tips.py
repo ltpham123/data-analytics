@@ -11,4 +11,4 @@ total_due = food_cost + tax + tip
 print("Food cost is " + str(food_cost) + " and tax is " + str(tax))
 # print("Tip is " + str(tip))
 print("Tip is " + format(tip, ".2f"))
-print("Total due is " + str(total_due))
+print("Total due is " + str(total_due)) # cast as a string to concatenate with the rest of the string
