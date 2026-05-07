@@ -32,3 +32,4 @@
 # Your current savings is [number].
 # At a [number]% interest rate, your savings account will be
 # worth [number] in [number] years
+# rule of 72: years to double = 72 / interest rate
