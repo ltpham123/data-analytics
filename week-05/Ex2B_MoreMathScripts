@@ -1,11 +1,14 @@
 #   1) How do you convert a temperature from Fahrenheit to Celsius?
+#   celsius = (fahrenheit - 32) * 5 / 9
 
 #   2) How do you convert a temperature from Celsius to Fahrenheit?
+#   fahrenheit = (celsius * 9 / 5) + 32
 
 #   3) Federal taxes are 23% of your salary every month. You make X amount of money.
 #   How much is withheld for taxes?
 #   Make sure not to display partial cents in your results! Experiment with using either the
 #   round() function or format() method to get results to display to two decimal places.
+
 
 #   4) How do you calculate the distance between coordinates (x1, y1) and (x2, y2)? Hint:
 #   You'll need to look up how to calculate a square root in Python, which may involve a
