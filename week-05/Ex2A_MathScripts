@@ -1,5 +1,22 @@
+# Lab 1: Net Worth Calculation
 # a) What are "assets" that would need to be included in this calculation? What about "debts"?
 # Assets include cash, bank balances, investments, property, and any other valuable possessions.
 # Debts include loans, credit card balances, mortgages, and any other financial obligations.
 
 # b) Net worth = Total Assets - Total Debts
+
+# Lab 2: Area of a Rectangle
+# Say you have a rectangle that has dimensions corresponding to your birthday – the
+# month number is one side and the day of the month is the other side. How would
+# you calculate the area of this rectangle?
+
+# Side A is [number]
+# Side B is [number]
+# The area of the rectangle is [number]
+
+# Lab 3: Tip Calculation
+# How do you calculate the tip amount on a restaurant bill given the tip percentage?
+# Assume tip percentage is 15%
+# # Tip amount = (Tip percentage / 100) * Bill total
+
+# Lab 4: Area of a Circle
