@@ -9,10 +9,11 @@
 #   Make sure not to display partial cents in your results! Experiment with using either the
 #   round() function or format() method to get results to display to two decimal places.
 
-
 #   4) How do you calculate the distance between coordinates (x1, y1) and (x2, y2)? Hint:
 #   You'll need to look up how to calculate a square root in Python, which may involve a
 #   function from the math module.
+
+#   Pythagorean theorem: distance = sqrt((x2 - x1)^2 + (y2 - y1)^2)
 
 #   5) You are going to tile a room whose dimensions are length by width feet. There are
 #   twelve tiles per box, each 1 foot by 1 foot. How many boxes of tiles do you need? You
