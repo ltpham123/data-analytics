@@ -30,9 +30,15 @@
 #   $250 per day to rent (including the driver’s pay). How many vans do you need? How
 #   much will it cost to rent vans? What is the cost if you split it per person?
 
-#   Test your script with 38 tourists. Now do some separate calculations to check your
+#   #   Test your script with 38 tourists. Now do some separate calculations to check your
 #   work:
 #   a) How much money did your script say you had to charge per person?
+#       Each person pays $19.74.
 #   b) If you multiply that out, how much did you collect?
+#       Total collected: $750.12.
 #   c) How much were the vans?
+#       Total cost of vans: $750.00.
 #   d) Why do you have leftover money?
+#       The leftover money is due to rounding the cost per person to two decimal places. The fractional
+#       round up causes the total collected amount to be slightly higher than the actual cost of the vans,
+#       but never more than $0.01 per person from the excess rounding.
