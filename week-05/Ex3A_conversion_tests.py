@@ -50,3 +50,18 @@ int(float(b))  # successfully converts the string '55' to the integer 55
 
 print(int(float(a)), type(int(float(a))))  # Output: 101 <class 'int'>
 print(int(float(b)), type(int(float(b))))  # Output: 55 <class 'int'>
+
+
+
+# Slicing to add just the numeric portion of the string to a new variable,
+# then cast number as an integer or string
+
+new_a = a[1:6]  # Slices the string ' 101.1 ' to get '101.1'
+new_b = b[0:2]  # Slices the string '55' to get '55'
+new_c = c[0:3]  # Slices the string '402 Stevens' to get '402'
+new_d = d[7:8]  # Slices the string 'Number 5 ' to get '5'
+
+print(new_a, type(new_a))  # Output: '101.1' <class 'str'>
+print(new_b, type(new_b))  # Output: '55' <class 'str'>
+print(new_c, type(new_c))  # Output: '402' <class 'str'>
+print(new_d, type(new_d))  # Output: '5' <class 'str'>
