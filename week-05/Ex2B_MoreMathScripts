@@ -1,0 +1,30 @@
+#   1) How do you convert a temperature from Fahrenheit to Celsius?
+
+#   2) How do you convert a temperature from Celsius to Fahrenheit?
+
+#   3) Federal taxes are 23% of your salary every month. You make X amount of money.
+#   How much is withheld for taxes?
+#   Make sure not to display partial cents in your results! Experiment with using either the
+#   round() function or format() method to get results to display to two decimal places.
+
+#   4) How do you calculate the distance between coordinates (x1, y1) and (x2, y2)? Hint:
+#   You'll need to look up how to calculate a square root in Python, which may involve a
+#   function from the math module.
+
+#   5) You are going to tile a room whose dimensions are length by width feet. There are
+#   twelve tiles per box, each 1 foot by 1 foot. How many boxes of tiles do you need? You
+#   can only buy full boxes, not a partial box.
+
+#   You also want to buy at least 10% more tiles than you need in order to handle chips,
+#   breakage, and mess-ups. How many total boxes will you buy?
+
+#   6) There are X people going on a tour. Charter vans seat 15 passengers each. Vans cost
+#   $250 per day to rent (including the driver’s pay). How many vans do you need? How
+#   much will it cost to rent vans? What is the cost if you split it per person?
+
+#   7) Test your script with 38 tourists. Now do some separate calculations to check your
+#   work:
+#   a) How much money did your script say you had to charge per person?
+#   b) If you multiply that out, how much did you collect?
+#   c) How much were the vans?
+#   d) Why do you have leftover money?
