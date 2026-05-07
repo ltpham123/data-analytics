@@ -22,11 +22,15 @@
 #   You also want to buy at least 10% more tiles than you need in order to handle chips,
 #   breakage, and mess-ups. How many total boxes will you buy?
 
+#   Find the total amount of tiles. Multiply by 1.10 to cover chips, breakage and mess-ups.
+#   Divide by 12 to find the number of boxes, rounded up since we can only buy full boxes.
+#   "To round up in Python, you can use the math.ceil() function from the math module."
+
 #   6) There are X people going on a tour. Charter vans seat 15 passengers each. Vans cost
 #   $250 per day to rent (including the driver’s pay). How many vans do you need? How
 #   much will it cost to rent vans? What is the cost if you split it per person?
 
-#   7) Test your script with 38 tourists. Now do some separate calculations to check your
+#   Test your script with 38 tourists. Now do some separate calculations to check your
 #   work:
 #   a) How much money did your script say you had to charge per person?
 #   b) If you multiply that out, how much did you collect?
