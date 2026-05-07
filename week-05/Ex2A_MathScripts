@@ -1,11 +1,11 @@
-# Lab 1: Net Worth Calculation
+# 1: Net Worth Calculation
 # a) What are "assets" that would need to be included in this calculation? What about "debts"?
 # Assets include cash, bank balances, investments, property, and any other valuable possessions.
 # Debts include loans, credit card balances, mortgages, and any other financial obligations.
 
 # b) Net worth = Total Assets - Total Debts
 
-# Lab 2: Area of a Rectangle
+# 2: Area of a Rectangle
 # Say you have a rectangle that has dimensions corresponding to your birthday – the
 # month number is one side and the day of the month is the other side. How would
 # you calculate the area of this rectangle?
@@ -14,14 +14,21 @@
 # Side B is [number]
 # The area of the rectangle is [number]
 
-# Lab 3: Tip Calculation
+# 3: Tip Calculation
 # How do you calculate the tip amount on a restaurant bill given the tip percentage?
 # Assume tip percentage is 15%
 # Tip amount = (Tip percentage / 100) * Bill total
 # The tip on a $[number] restaurant bill is $[number]
 
-# Lab 4: Area of a Circle
+# 4: Area of a Circle
 # The diameter of a given circle is the same as the day of your birthday (not the month,
 # just the day). Figure out the formula, refresh your recollection of the difference
 # between diameter and radius, and figure out what the script should look like.
 # The area of a circle with radius [number] is [number]
+
+# 5: Savings Growth
+# How long will it take a savings account worth X to double in value based on an interest
+# rate of IR? (Hint: Look up the “rule of 72”)
+# Your current savings is [number].
+# At a [number]% interest rate, your savings account will be
+# worth [number] in [number] years
