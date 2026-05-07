@@ -3,6 +3,7 @@
 # Your current savings is [number].
 # At a [number]% interest rate, your savings account will be
 # worth [number] in [number] years
+# rule of 72: years to double = 72 / interest rate
 
 interest_rate = 5  # Example interest rate in percent
 current_savings = 10000  # Example current savings
