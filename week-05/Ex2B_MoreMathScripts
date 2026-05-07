@@ -39,6 +39,6 @@
 #   c) How much were the vans?
 #       Total cost of vans: $750.00.
 #   d) Why do you have leftover money?
-#       The leftover money is due to rounding the cost per person to two decimal places. The fractional
-#       round up causes the total collected amount to be slightly higher than the actual cost of the vans,
-#       but never more than $0.01 per person from the excess rounding.
+#       The leftover money is due to rounding the cost per person to two decimal places. The
+#       fractional round up causes the total collected amount to be slightly higher than the 
+#       actual cost of the vans, but never more than $0.01 per person from the excess rounding.
