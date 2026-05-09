@@ -2,3 +2,7 @@
 #   After adding Hoppers, the list watch_list now includes the 9 movies I'd like to watch
 #   ['Fight Club', 'Forrest Gump', 'Hoppers', 'Inception', 'Pulp Fiction', 'The Dark Knight', 'The Godfather', 'The Matrix', 'The Shawshank Redemption']
 
+#   candy_story.py
+#   Had me confused for a second why it was happening, but I forgot that sets do not maintain order
+#   and do not allow duplicates. So the output will be a set of unique candy combinations without
+#   any specific order.

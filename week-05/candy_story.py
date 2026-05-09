@@ -14,6 +14,6 @@ candy_combinations.add(fruit_flavors[1] + " " + candies[2])
 candy_combinations.add(fruit_flavors[2] + " " + candies[2])
 print(f'Today\'s candy combinations include: ')
 print(candy_combinations)
-# Had me confused for a second why it was happening, but I forgot that sets do not maintain order
-# and do not allow duplicates. So the output will be a set of unique candy combinations without
-# any specific order.
+#   Had me confused for a second why it was happening, but I forgot that sets do not maintain order
+#   and do not allow duplicates. So the output will be a set of unique candy combinations without
+#   any specific order.
