@@ -6,3 +6,8 @@
 #   Had me confused for a second why it was happening, but I forgot that sets do not maintain order
 #   and do not allow duplicates. So the output will be a set of unique candy combinations without
 #   any specific order.
+
+#   address_entry.py
+#   worked through dictionaries and nesting dictionarys to add key:value
+#   pairs and how to access them through their keys
+
