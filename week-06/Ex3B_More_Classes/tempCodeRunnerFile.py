@@ -1,0 +1,6 @@
+oberweis = Restaurant("Oberweis", "Milkshakes")
+# oberweis.describe_rest()
+# oberweis.rest_open()
+# oberweis.print_num_served()
+# oberweis.add_num_served()
+# oberweis.print_num_served()
