@@ -19,8 +19,18 @@ test_file = open("about_me.txt", "r")
 # print(test_file.readlines(10))  # just prints out the next line; the number just prints the bytes, not exact character or words
 
 # print(test_file.readlines(100))  # stops after second sentence
-print(test_file.readlines(-1))  # prints all
+# print(test_file.readlines(-1))  # prints all
 
+read50char = test_file.read(50)
 
+readline_list = []
+for i in range(4):
+    readline_list.append(test_file.readline().strip())
+
+read100lines = test_file.readlines(100)
+
+print(f"First 50 characters: {read50char}")
+print(f"Next four lines, as list by line: {readline_list}")
+print(f"Next 100 characters, as list by line, rounded up to complete lines: {read100lines}")
 
 test_file.close()
