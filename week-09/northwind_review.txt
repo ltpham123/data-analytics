@@ -1,0 +1,139 @@
+∗ What does a value in this column represent? What values might you see here?
+categories
+	CategoryID = PK, for distinct categories, numeric*
+	CategoryName = name for category, text*
+	Description = about the category, text
+	Picture = an actual image of the category, photo
+customers
+	CustomerID = PK, distinct customer identifier, numeric*
+	CompanyName = company they represent, string*
+	ContactName = contact name, string
+	ContactTitle = contact title, string
+	Address = location of customer/company, string
+	City = city of customer/company, string*
+	Region = region of customer/company, string*
+	PostalCode = postal/zip code of customer/company, numeric*
+	Country = country of customer/company, string*
+	Phone = phone of customer/company, numeric
+	Fax = fax of customer/company, numeric
+employees (may be useful for internal reporting)
+	EmployeeID - PK, employee identifier, numeric*
+	LastName - employee last name, string
+	FirstName - employee first name, string
+	Title - employee job title, string*
+	TitleOfCourtesy - employee title (address), string
+	BirthDate - employee birth date, date & time
+	HireDate - employee hire date, date & time
+	AddressCity - employee residential city, string*
+	RegionPostalCode - employee regional zip code, numeric*
+	Country - employee residing country, string*
+	HomePhone - employee home phone, numeric
+	Extension - employee work extension, numeric
+	Photo - employee photo, photo
+	Notes - additional employee information, string
+	ReportsTo - who the employee is under, string*
+	PhotoPath - path to access employee photo, string
+	Salary - how much employee makes, numeric (float)*
+employeeterritories
+	EmployeeID - FK
+	TerritoryID - FK
+order details
+	OrderID - FK*
+	ProductID - FK*
+	UnitPrice - price of product, numeric (float)*
+	Quantity - amount ordered, numeric*
+	Discount - discount for order, numeric (float)*
+orders
+	OrderID - PK, order identifier, numeric*
+	CustomerID - FK*
+	EmployeeID - FK*
+	OrderDate - date of order, date & time*
+	RequiredDate - latest expected date of shipment, date & time*
+	ShippedDate - date shipped, date & time*
+	ShipVia - FK, to shipper*
+	Freight - cost or weight?, numeric*
+	ShipName - receiver name, string
+	ShipAddress - receiver address, string
+	ShipCity - receiver city, string*
+	ShipRegion - receiver region, string*
+	ShipPostalCode - receiver postal/zip code, numeric*
+	ShipCountry - receiver country, string*
+products
+	ProductID - PK, product identifier, numeric*
+	ProductName - name of product, string*
+	SupplierID - FK*
+	CategoryID - FK*
+	Quantity Per Unit - how much items are in a unit order, numeric*
+	UnitPrice - price of unit, numeric*
+	UnitsInStock - available units, numeric*
+	UnitsOnOrder - units ordered, numeric*
+	ReorderLevel - priority?, numeric*
+	Discontinued - status of product, bool?*
+region
+	RegionID - PK, region identifier*
+	RegionDescription - about the region, string
+shippers
+	ShipperID - PK, shipper identifier, numeric*
+	CompanyName - name of shipper, string*
+	Phone - phone number of shipper, numeric
+suppliers
+	SupplierID - PK, supplier identifier, numeric*
+	CompanyName - name of supplier, string*
+	ContactName - name of supplier contact, string
+	ContactTitle - job title of supplier contact, string
+	Address - residing address of supplier, string
+	City - residing city of supplier, string*
+	Region - residing region of supplier, string*
+	PostalCode - residing postal/zip code of supplier, numeric*
+	Country - residing country of supplier, string*
+	Phone - supplier phone number, numeric
+	Fax - supplier fax number, numeric
+	HomePage - link to supplier's page, string since hyperlink?
+territories
+	TerritoryID - PK, territory identifier, numeric*
+
+
+∗ Is this column a part of the primary key to this table?
+categories - CategoryID
+customers - CustomerID
+employees - EmployeeID
+employeeterritories - N/A
+order details - N/A
+orders - OrderID
+products - ProductID
+region - RegionID
+shippers - ShipperID
+suppliers - SupplierID
+territories - TerritoryID
+
+∗ Is this column a part of a foreign key that points to a record in another table?
+employeeterritories
+	EmployeeID
+	TerritoryID
+order details
+	OrderID
+	ProductID
+products
+	SupplierID
+	CategoryID
+
+∗ Would this column be valuable to bring into our Power BI Model? Yes, or no? Why?
+	Marked with a *; we can exclude description unless we are doing a case study or deeper analysis as descriptions aren't useful as labels or numbers are in graphs, tables, and models.
+	We include PKs to link tables together to line up records and data in PowerBI; they can be hidden as a category.
+	Pictures, links, and contact information are in the same field as description, and some employee information may be used for internal research and investigations.
+	It is dependent on what we are trying to find.
+	Trends whether products do better seasonally or if there is a popular time for buying overall are identified through date & time categories.
+
+∗ Do you believe this column is appropriately named for Data Analysis purposes?
+	Most columns are appropriately named for Data Analysis purposes as it is straightforward what the column is telling you.
+
+∗ If not, what might be a more appropriate name?
+	Some columns like ShipVia could do better, like when they're linked to their appropriate table for the shipper's name.
+
+∗ What might be the data type and format for this column in a Power BI Model?
+	Noted above
+
+∗ Can you think of any calculations where this column data might be used?
+	Numeric operations for numeric functions like pricing, count can be used for description identifiers like popular countries, regions, cities, and even CustomerID for customer loyalty.
+	
+	
