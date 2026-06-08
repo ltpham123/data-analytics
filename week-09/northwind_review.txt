@@ -31,7 +31,7 @@ employees (may be useful for internal reporting)
 	Extension - employee work extension, numeric
 	Photo - employee photo, photo
 	Notes - additional employee information, string
-	ReportsTo - who the employee is under, string*
+	ReportsTo - PK (self-calling), who the employee is under, string*
 	PhotoPath - path to access employee photo, string
 	Salary - how much employee makes, numeric (float)*
 employeeterritories
